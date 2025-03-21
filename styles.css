@@ -1,0 +1,406 @@
+/* ========== GLOBAL VARIABLES ========== */
+:root {
+    --primary-color: #00ff88;
+    --secondary-color: #00b8ff;
+    --dark-color: #0a192f;
+    --light-color: #ccd6f6;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --transition-speed: 0.3s;
+}
+
+/* ========== BASE STYLES ========== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ========== TYPOGRAPHY ========== */
+h1, h2, h3 {
+    font-family: 'Orbitron', sans-serif;
+}
+
+h1 {
+    font-size: 3.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.glow {
+    text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+}
+
+/* ========== LAYOUT & CONTAINERS ========== */
+.container {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+/* ========== HEADER & NAVIGATION ========== */
+header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--dark-color);
+    padding: 4rem 0;
+    text-align: center;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+nav {
+    background: var(--glass-bg);
+    padding: 1rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+nav a {
+    color: var(--light-color);
+    text-decoration: none;
+    margin: 0 1.5rem;
+    font-weight: bold;
+    transition: all var(--transition-speed) ease;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* ========== CARDS & COMPONENTS ========== */
+.card {
+    background: var(--glass-bg);
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 15px;
+    border: 1px solid var(--glass-border);
+    transition: all var(--transition-speed) ease;
+    backdrop-filter: blur(10px);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,255,136,0.1);
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    margin: 0.5rem;
+    background: var(--primary-color);
+    color: var(--dark-color);
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all var(--transition-speed) ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* ========== TOOL CARD STYLES ========== */
+.tool {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.tool-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 15px;
+    border: 2px solid var(--glass-border);
+    transition: transform var(--transition-speed) ease;
+}
+
+.tool-image:hover {
+    transform: scale(1.05);
+}
+
+.tool-content {
+    flex: 1;
+}
+
+/* ========== CODE BLOCK & COPY BUTTON ========== */
+.code-block {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    margin: 20px 0;
+    white-space: pre-wrap;
+}
+
+.copy-btn {
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.copy-btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,255,136,0.2);
+}
+
+/* ========== FOOTER ========== */
+footer {
+    background: var(--dark-color);
+    color: var(--light-color);
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 4rem;
+    border-top: 1px solid var(--glass-border);
+}
+
+/* ========== ANIMATIONS & EFFECTS ========== */
+.blink {
+    animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
+
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle, rgba(0,255,136,0.1) 0%, rgba(0,184,255,0.05) 100%);
+    animation: pulse 10s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    nav a {
+        margin: 0 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+
+    .tool {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .tool-image {
+        width: 100px;
+        height: 100px;
+    }
+}
+.payment-box {
+    background: #1a1a1a;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.price {
+    font-size: 2.5rem;
+    color: #00ffcc;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background: #222;
+    color: #fff;
+}
+/* Add these styles to your existing CSS */
+.payment-box {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.currency-selector {
+    margin-bottom: 20px;
+}
+
+.currency-selector label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.currency-selector select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background: #222;
+    color: #fff;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+}
+
+.payment-details {
+    margin-top: 20px;
+}
+
+.wallet-info {
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.wallet-address {
+    margin: 10px 0;
+    padding: 10px;
+    background: #222;
+    border-radius: 5px;
+    word-wrap: break-word;
+    font-family: monospace;
+}
+
+.copy-btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.file-attachment {
+    margin-bottom: 20px;
+}
+
+.upload-box {
+    border: 2px dashed #333;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-box:hover {
+    border-color: var(--primary-color);
+    background: rgba(0, 255, 136, 0.05);
+}
+
+.upload-label {
+    display: block;
+    cursor: pointer;
+}
+
+.upload-icon {
+    font-size: 2em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.upload-text {
+    color: #888;
+}
+
+#paymentProof {
+    display: none;
+}
+
+.file-preview {
+    margin-top: 15px;
+}
+
+.file-info {
+    background: #222;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.file-name {
+    color: var(--primary-color);
+}
+
+.file-size {
+    color: #888;
+    font-size: 0.9em;
+}
+
+.verify-btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.verification-result {
+    margin-top: 30px;
+    padding: 20px;
+    background: #1a1a1a;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.verification-email {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.verification-message {
+    color: #888;
+}
