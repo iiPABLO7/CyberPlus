@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Plus+ - Payment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="animated-bg"></div>
+    
+    <header>
+        <h1 class="glow">Cyber Plus<span class="blink">+</span></h1>
+        <p>Unlock the Tool</p>
+    </header>
+
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="../cybersecurity.html">Cybersecurity</a>
+        <a href="../programming.html">Programming</a>
+        <a href="../tech-news.html">Tech News</a>
+        <a href="../about.html">About</a>
+    </nav>
+
+    <div class="container">
+        <section class="card">
+            <h2 id="toolTitle">Crypto Payment</h2>
+            <div class="payment-box">
+                <p class="price" id="priceDisplay">$24.99</p>
+                <p id="toolDescription">Unlock access to our tool</p>
+                
+                <!-- Currency Selector -->
+                <div class="currency-selector">
+                    <label for="cryptoCurrency">Select Currency:</label>
+                    <select id="cryptoCurrency" onchange="updatePaymentDetails()">
+                        <option value="">-- Select a currency --</option>
+                        <option value="btc">Bitcoin (BTC)</option>
+                        <option value="eth">Ethereum (ETH)</option>
+                        <option value="trx">Tron (TRX)</option>
+                        <option value="xrp">XRP (XRP)</option>
+                        <option value="xlm">Stellar (XLM)</option>
+                    </select>
+                </div>
+                
+                <!-- Payment Details Section -->
+                <div class="payment-details" id="paymentDetails" style="display: none;">
+                    <div class="wallet-info">
+                        <p>Send exact amount to:</p>
+                        <div class="wallet-address" id="walletAddress"></div>
+                        <button class="btn copy-btn" onclick="copyAddress()">Copy Address</button>
+                    </div>
+                    
+                    <!-- File Attachment Section -->
+                    <div class="file-attachment">
+                        <div class="upload-box">
+                            <label for="paymentProof" class="upload-label">
+                                <span class="upload-icon">📎</span>
+                                <span class="upload-text">Attach Payment Proof</span>
+                            </label>
+                            <input type="file" id="paymentProof" accept=".jpg,.jpeg,.png,.pdf">
+                            <div class="file-preview" id="filePreview"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verify Button -->
+                    <button class="btn verify-btn" onclick="verifyPayment()">Verify Payment</button>
+                </div>
+                
+                <!-- Verification Result Section -->
+                <div class="verification-result" id="verificationResult" style="display: none;">
+                    <p class="verification-email">
+                        <strong>pablo7ii@hotmail.com</strong>
+                    </p>
+                    <p class="verification-message">
+                        Contact this email to get your order.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Cyber Plus+. All rights reserved.</p>
+        <div class="logo-text">Cyber Plus+ - Your Gateway to the Digital Future</div>
+    </footer>
+
+    <script>
+        // Wallet addresses
+        const walletAddresses = {
+            'btc': 'bc1q9pva97ne5f8zkgfss8mxcu665j27uhts0277l8',
+            'eth': '0xa3281F6c9B94498284597589B97cce0E273D8B9a',
+            'trx': 'TMFXCqMnnqFAbG7pUx3VqHC9cJ6V7pate',
+            'xrp': 'rGhswqHC345BbCvK7GRoMv6BeF2cXSqfBs',
+            'xlm': 'GDNPCPPAH5OJGEJ7N2YBG4KWPSLQIBHSWSM4AJQIAYIBAM4L46I5PIL5'
+        };
+
+        // Update payment details when currency is selected
+        function updatePaymentDetails() {
+            const currency = document.getElementById('cryptoCurrency').value;
+            const paymentDetails = document.getElementById('paymentDetails');
+            
+            if (currency) {
+                document.getElementById('walletAddress').textContent = walletAddresses[currency];
+                paymentDetails.style.display = 'block';
+            } else {
+                paymentDetails.style.display = 'none';
+            }
+        }
+
+        // Copy address to clipboard
+        function copyAddress() {
+            const currency = document.getElementById('cryptoCurrency').value;
+            const address = walletAddresses[currency];
+            navigator.clipboard.writeText(address)
+                .then(() => alert('Address copied to clipboard!'))
+                .catch(() => alert('Failed to copy address'));
+        }
+
+        // Handle file upload
+        const fileInput = document.getElementById('paymentProof');
+        const filePreview = document.getElementById('filePreview');
+
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                const file = this.files[0];
+                filePreview.innerHTML = `
+                    <div class="file-info">
+                        <span class="file-name">${file.name}</span>
+                        <span class="file-size">(${(file.size / 1024).toFixed(2)} KB)</span>
+                    </div>`;
+            }
+        });
+
+        // Verify payment
+        function verifyPayment() {
+            if (!fileInput.files.length) {
+                alert('Please attach your payment proof.');
+                return;
+            }
+
+            const verificationResult = document.getElementById('verificationResult');
+            verificationResult.style.display = 'block';
+            verificationResult.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
